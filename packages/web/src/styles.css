@@ -1,0 +1,250 @@
+:root {
+  --sre-page-bg: #f5f5f5;
+  --sre-panel-bg: #ffffff;
+  --sre-border: #d9d9d9;
+  --sre-text: rgba(0, 0, 0, 0.88);
+  --sre-muted: rgba(0, 0, 0, 0.45);
+  --sre-bubble-user: #1677ff;
+  --sre-bubble-user-text: #ffffff;
+  --sre-bubble-assistant: #ffffff;
+  --sre-bubble-system: #fafafa;
+  --sre-log-info: rgba(0, 0, 0, 0.75);
+  --sre-log-warn: #d48806;
+  --sre-log-error: #cf1322;
+}
+
+html[data-theme='dark'] {
+  --sre-page-bg: #141414;
+  --sre-panel-bg: #1f1f1f;
+  --sre-border: #303030;
+  --sre-text: rgba(255, 255, 255, 0.85);
+  --sre-muted: rgba(255, 255, 255, 0.45);
+  --sre-bubble-user: #1668dc;
+  --sre-bubble-user-text: #ffffff;
+  --sre-bubble-assistant: #1f1f1f;
+  --sre-bubble-system: #262626;
+  --sre-log-info: rgba(255, 255, 255, 0.75);
+  --sre-log-warn: #d89614;
+  --sre-log-error: #e84749;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--sre-page-bg);
+  color: var(--sre-text);
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', Roboto,
+    'Helvetica Neue', Arial, sans-serif;
+}
+
+.mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
+  font-size: 12px;
+}
+
+.sre-pre {
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-family: inherit;
+}
+
+.sre-json {
+  margin: 0;
+  padding: 8px;
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 12px;
+  line-height: 1.5;
+  background: var(--sre-bubble-system);
+  border: 1px solid var(--sre-border);
+  border-radius: 6px;
+  max-height: 240px;
+  overflow: auto;
+}
+
+.sre-clamped {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* --- layout --------------------------------------------------------------- */
+
+.sre-page {
+  padding: 16px;
+}
+
+.sre-centered {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* --- chat ----------------------------------------------------------------- */
+
+.sre-chat {
+  display: flex;
+  gap: 12px;
+  height: calc(100vh - 64px - 32px);
+  min-height: 420px;
+}
+
+.sre-chat-side {
+  width: 260px;
+  flex: 0 0 260px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-right: 1px solid var(--sre-border);
+  padding-right: 8px;
+}
+
+.sre-chat-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.sre-transcript {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 4px 8px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sre-bubble {
+  max-width: 780px;
+  border-radius: 8px;
+  padding: 8px 12px;
+  border: 1px solid var(--sre-border);
+  background: var(--sre-bubble-assistant);
+}
+
+.sre-bubble-user {
+  align-self: flex-end;
+  background: var(--sre-bubble-user);
+  color: var(--sre-bubble-user-text);
+  border-color: transparent;
+}
+
+.sre-bubble-system {
+  align-self: center;
+  background: var(--sre-bubble-system);
+  color: var(--sre-muted);
+  font-size: 12px;
+}
+
+.sre-bubble-meta {
+  font-size: 11px;
+  opacity: 0.65;
+  margin-bottom: 4px;
+}
+
+.sre-caret {
+  display: inline-block;
+  width: 6px;
+  height: 14px;
+  vertical-align: text-bottom;
+  background: currentColor;
+  animation: sre-blink 1s steps(2, start) infinite;
+}
+
+@keyframes sre-blink {
+  to {
+    visibility: hidden;
+  }
+}
+
+.sre-composer {
+  border-top: 1px solid var(--sre-border);
+  padding-top: 8px;
+}
+
+/* --- kernels log ---------------------------------------------------------- */
+
+.sre-log {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 12px;
+  line-height: 1.6;
+  max-height: 340px;
+  overflow: auto;
+  padding: 8px;
+  background: var(--sre-bubble-system);
+  border: 1px solid var(--sre-border);
+  border-radius: 6px;
+}
+
+.sre-log-line {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.sre-log-ts {
+  color: var(--sre-muted);
+  margin-right: 6px;
+}
+
+.sre-log-scope {
+  color: var(--sre-muted);
+  margin-right: 6px;
+}
+
+/* --- misc ----------------------------------------------------------------- */
+
+.sre-kb-hit {
+  border: 1px solid var(--sre-border);
+  border-radius: 6px;
+  padding: 8px;
+  background: var(--sre-bubble-system);
+}
+
+.sre-pick-card {
+  cursor: pointer;
+  border: 1px solid var(--sre-border);
+  border-radius: 8px;
+  padding: 12px;
+  height: 100%;
+  transition: border-color 0.2s;
+}
+
+.sre-pick-card-active {
+  border-color: var(--sre-bubble-user);
+  box-shadow: 0 0 0 1px var(--sre-bubble-user) inset;
+}
+
+.sre-session-item {
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  padding: 6px 8px;
+}
+
+.sre-session-item:hover {
+  background: var(--sre-bubble-system);
+}
+
+.sre-session-item-active {
+  border-color: var(--sre-bubble-user);
+  background: var(--sre-bubble-system);
+}
+
+.sre-scroll-y {
+  overflow-y: auto;
+}
+
+.sre-kv-row {
+  margin-bottom: 6px;
+}

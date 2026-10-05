@@ -1,0 +1,78 @@
+{
+  "name": "@sre/desktop",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Electron shell for SRE Agent: hosts the web UI and owns the lifetime of the @sre/server process",
+  "author": "SRE Agent",
+  "type": "module",
+  "main": "main.js",
+  "productName": "SRE Agent",
+  "scripts": {
+    "dev": "electron .",
+    "build": "electron-builder",
+    "smoke": "node smoke.mjs",
+    "postinstall": "node scripts/ensure-electron.mjs"
+  },
+  "devDependencies": {
+    "electron": "^44.5.1",
+    "electron-builder": "^26.15.3"
+  },
+  "build": {
+    "appId": "io.sre.agent.desktop",
+    "productName": "SRE Agent",
+    "copyright": "Copyright (c) SRE Agent",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "main.js",
+      "preload.cjs",
+      "server-process.js",
+      "renderer/**/*",
+      "package.json"
+    ],
+    "mac": {
+      "category": "public.app-category.developer-tools",
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
+      ]
+    },
+    "dmg": {
+      "title": "SRE Agent ${version}",
+      "contents": [
+        {
+          "x": 140,
+          "y": 220
+        },
+        {
+          "x": 400,
+          "y": 220,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true
+    }
+  }
+}

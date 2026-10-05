@@ -1,0 +1,11 @@
+{
+  "name": "sre-agent-dsh-bridge",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "DeepSeek Harness plugin that bridges the dsh agent kernel to the SRE Agent platform (tool injection, approval gate, event relay, per-session model override)",
+  "exports": {
+    ".": "./index.js",
+    "./mock-llm": "./mock-llm.js"
+  }
+}
